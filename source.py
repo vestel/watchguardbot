@@ -18,9 +18,7 @@ def osmand_link(lat, lon):
     return "[Osmand](https://osmand.net/go?lat=%s&lon=%s&z=16)" % (lat, lon)
 
 def bing_link(lat, lon):
-    a = "[Bing](https://www.bing.com/maps/?v=2&cp=%s~%s&lvl=17&dir=0&sty=c&sp=point.%s_%s_Object)" % (lat, lon, lat, lon)
-    print(a)
-    return a
+    return "[Bing](https://www.bing.com/maps/?v=2&cp=%s~%s&lvl=17&dir=0&sty=c&sp=point.%s_%s_Object)" % (lat, lon, lat, lon)
 
 def sanitize_coordinate(coordinate):
     res = coordinate.replace(' ','.')
