@@ -20,6 +20,10 @@ def osmand_link(lat, lon):
 def bing_link(lat, lon):
     return "[Bing](https://www.bing.com/maps/?v=2&cp=%s~%s&lvl=17&dir=0&sty=c&sp=point.%s_%s_Object)" % (lat, lon, lat, lon)
 
+def bmaps_link(lat, lon):
+    return "[BMaps](https://balticmaps.eu/map/?lat=%s&lon=%s&color=red)"%(lat,lon)
+
+
 def sanitize_coordinate(coordinate):
     res = coordinate.replace(' ','.')
     res = res.replace(',','.')
@@ -27,7 +31,7 @@ def sanitize_coordinate(coordinate):
 
 def prepare_response(num, coordinates):
     lat, lon = coordinates
-    return 'Uwaga! #%d (%s, %s) %s %s %s %s' % (num, lat, lon, waze_link(lat,lon), gmaps_link(lat, lon), osmand_link(lat, lon), bing_link(lat,lon)) 
+    return 'Uwaga! #%d (%s, %s) %s %s %s %s %s' % (num, lat, lon, waze_link(lat,lon), gmaps_link(lat, lon), osmand_link(lat, lon), bing_link(lat,lon), bmaps_link(lat,lon)) 
 
 def handle(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
