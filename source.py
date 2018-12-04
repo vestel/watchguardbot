@@ -9,7 +9,7 @@ from settings import TOKEN
 REGEXP = re.compile(r'.*?N?(\d{2}[\.|,|\s]\d{4,})N?[;|\s|,|\.]{1,10}E?(\d{2}[\.|,|\s]\d{4,})E?.*?')
 
 def waze_link(lat, lon):
-    return "[Waze](https://www.waze.com/location?ll=%s,%s&navigate=yes)" % (lat, lon)
+    return "[Waze](https://www.waze.com/location?ll=%s,%s&navigate=yes)" % (lon, lat)
 
 def gmaps_link(lat, lon):
     return "[GMaps](https://www.google.com/maps/search/?api=1&query=%s,%s)" % (lat, lon)
