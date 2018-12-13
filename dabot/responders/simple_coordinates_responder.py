@@ -43,9 +43,8 @@ class SimpleCoordinatesResponder(object):
                 text += self.prepare_response(idx+1, lat, lon)+'\n\n'
             else:
                 lon, lat = coordinates
-
-            if math.trunc(float(lat)) in range(50, 61) and math.trunc(float(lon)) in range(18,29):
-                text += self.prepare_response(idx+1, lat, lon)+'\n\n'
+                if math.trunc(float(lat)) in range(50, 61) and math.trunc(float(lon)) in range(18,29):
+                    text += self.prepare_response(idx+1, lat, lon)+'\n\n'
         return text
 
     def response_params(self):
