@@ -12,12 +12,14 @@ BOT = telepot.Bot(TOKEN)
 
 def handle(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    print(content_type, chat_type, chat_id)
 
     # ACL check: only specific chats are allowed
-    if chat_id not in ALLOWED:
+    if chat_id not in ALLOWED.keys():
+        print('Filtered: ', content_type, chat_type, chat_id)
         return
-
+    else:
+        print('Received: ', content_type, ALLOWED[chat_id])
+        
     # Responders are classes that respond to msg-s
     cListener = SimpleCoordinatesResponder(msg)
     if cListener.valid:
