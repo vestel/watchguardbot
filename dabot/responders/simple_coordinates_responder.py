@@ -2,6 +2,7 @@ import math
 import telepot 
 
 from parsers.simple_coordinates_parser import SimpleCoordinatesParser
+from settings import INDEX_START
 
 class SimpleCoordinatesResponder(object):
     def __init__(self, msg):
@@ -10,6 +11,7 @@ class SimpleCoordinatesResponder(object):
         parser = SimpleCoordinatesParser(msg['text'])
         self.valid = self.valid and parser.valid()
         self.reply_to = msg['message_id']
+        self.index = int(msg['message_id'])-INDEX_START
         if self.valid:
             self.coords = parser.normalize()
 
@@ -35,7 +37,7 @@ class SimpleCoordinatesResponder(object):
             self.bmaps_link(lat,lon)) 
 
     def response_msg(self): 
-        text = '*#%s.' % self.reply_to
+        text = '*#%s.' % self.index
         for idx, coordinates in enumerate(self.coords):
             # TODO Flip coordinates during check in case of incorrect order
             lat, lon = coordinates
