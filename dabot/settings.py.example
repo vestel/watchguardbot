@@ -1,0 +1,4 @@
+TOKEN='Token-from-Telegram-Bot-Config'
+ALLOWED={}
+ALLOWED[-ID] = 'Human-Readable Group Name'
+
