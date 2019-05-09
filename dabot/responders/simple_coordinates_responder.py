@@ -16,7 +16,8 @@ class SimpleCoordinatesResponder(object):
             self.coords = parser.normalize()
 
     def waze_link(self, lat, lon):
-        return "[Waze](https://www.waze.com/location?ll=%s,%s&navigate=yes)" % (lon, lat)
+        #return "[Waze](https://www.waze.com/location?ll=%s,%s&navigate=yes)" % (lon, lat)
+        return "[Waze](https://www.waze.com/location?ll=%s,%s&navigate=yes)" % (lat, lon)
 
     def gmaps_link(self, lat, lon):
         return "[GMaps](https://www.google.com/maps/search/?api=1&query=%s,%s)" % (lat, lon)
