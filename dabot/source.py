@@ -1,12 +1,8 @@
-import math
-import sys
 import time
-import re
 import telepot
 from telepot.loop import MessageLoop
 
-from responders.simple_coordinates_responder import SimpleCoordinatesResponder
-#from responders.simple_photo_url_fetcher import SimplePhotoUrlFetcher
+from responders.complex_coordinates_responder import ComplexCoordinatesResponder
 from settings import TOKEN, ALLOWED
 
 BOT = telepot.Bot(TOKEN)
@@ -23,7 +19,7 @@ def handle(msg):
         
     # Responders are classes that respond to msg-s
 
-    cListener = SimpleCoordinatesResponder(msg)
+    cListener = ComplexCoordinatesResponder(msg)
     if cListener.valid:
         BOT.sendMessage(chat_id, cListener.response_msg(), **cListener.response_params())
 

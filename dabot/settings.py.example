@@ -1,4 +1,5 @@
 TOKEN='Token-from-Telegram-Bot-Config'
+START_INDEX=0  #Number to subtract from message_id to get msg number
 ALLOWED={}
 ALLOWED[-ID] = 'Human-Readable Group Name'
 

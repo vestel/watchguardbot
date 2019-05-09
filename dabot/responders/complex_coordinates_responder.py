@@ -2,14 +2,19 @@ import math
 import telepot 
 
 from parsers.simple_coordinates_parser import SimpleCoordinatesParser
+from parsers.other_coordinates_parser import OtherCoordinatesParser
 from settings import INDEX_START
 
-class SimpleCoordinatesResponder(object):
+class ComplexCoordinatesResponder(object):
     def __init__(self, msg):
         msg_type, _chat_type, chat_id = telepot.glance(msg)
         self.valid =  msg_type == 'text'
-        parser = SimpleCoordinatesParser(msg['text'])
-        self.valid = self.valid and parser.valid()
+        if self.valid:
+            parser = SimpleCoordinatesParser(msg['text'])
+            self.valid = self.valid and parser.valid()
+        if not self.valid:
+            parser = OtherCoordinatesParser(msg['text'])
+            self.valid = parser.valid()
         self.reply_to = msg['message_id']
         self.index = int(msg['message_id'])-INDEX_START
         if self.valid:
@@ -37,17 +42,18 @@ class SimpleCoordinatesResponder(object):
             self.osmand_link(lat, lon), self.bing_link(lat,lon), 
             self.bmaps_link(lat,lon)) 
 
-    def response_msg(self): 
-        text = '*#%s.' % self.index
+    def response_msg(self):
+        text = ''
+        prefix = '*#%s.' % self.index
         for idx, coordinates in enumerate(self.coords):
             # TODO Flip coordinates during check in case of incorrect order
             lat, lon = coordinates
             if math.trunc(float(lat)) in range(50, 61) and math.trunc(float(lon)) in range(18,29):
-                text += self.prepare_response(idx+1, lat, lon)+'\n\n'
+                text += prefix + self.prepare_response(idx+1, lat, lon)+'\n\n'
             else:
                 lon, lat = coordinates
                 if math.trunc(float(lat)) in range(50, 61) and math.trunc(float(lon)) in range(18,29):
-                    text += self.prepare_response(idx+1, lat, lon)+'\n\n'
+                    text += prefix + self.prepare_response(idx+1, lat, lon)+'\n\n'
         return text
 
     def response_params(self):
