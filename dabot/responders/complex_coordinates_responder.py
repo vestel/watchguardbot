@@ -54,6 +54,8 @@ class ComplexCoordinatesResponder(object):
                 lon, lat = coordinates
                 if math.trunc(float(lat)) in range(50, 61) and math.trunc(float(lon)) in range(18,29):
                     text += prefix + self.prepare_response(idx+1, lat, lon)+'\n\n'
+                else:
+                    text += prefix + str(idx+1)+'*: Ignored due to our of search zone'
         return text
 
     def response_params(self):

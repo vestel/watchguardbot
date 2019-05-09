@@ -21,6 +21,8 @@ def handle(msg):
 
     cListener = ComplexCoordinatesResponder(msg)
     if cListener.valid:
+        # msg = cListener.response_msg()
+        # print('cL:', msg)
         BOT.sendMessage(chat_id, cListener.response_msg(), **cListener.response_params())
 
     #cListener = SimplePhotoUrlFetcher(msg)
