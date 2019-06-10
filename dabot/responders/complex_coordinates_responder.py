@@ -34,7 +34,7 @@ class ComplexCoordinatesResponder(object):
         return "[Bing](https://www.bing.com/maps/?v=2&cp=%s~%s&lvl=17&dir=0&sty=c&sp=point.%s_%s_Object)" % (lat, lon, lat, lon)
 
     def bmaps_link(self, lat, lon):
-        return "[Baltic](https://balticmaps.eu/map/?lat=%s&lon=%s&color=red)"%(lat,lon)
+        return "[Baltic](https://balticmaps.eu/map/?lat=%s&lon=%s&color=red&key=MK_464786&zoom=17)"%(lat,lon)
 
     def prepare_response(self, num, lat, lon):
         return '%d* (%s, %s) %s %s %s %s %s' % (num, lat, lon, 
