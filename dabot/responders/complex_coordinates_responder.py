@@ -12,7 +12,7 @@ class ComplexCoordinatesResponder(object):
         if self.valid:
             parser = SimpleCoordinatesParser(msg['text'])
             self.valid = self.valid and parser.valid()
-        if not self.valid:
+        if not self.valid and msg_type == 'text':
             parser = OtherCoordinatesParser(msg['text'])
             self.valid = parser.valid()
         self.reply_to = msg['message_id']
