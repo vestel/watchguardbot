@@ -3,6 +3,7 @@ import telepot
 from telepot.loop import MessageLoop
 
 from responders.complex_coordinates_responder import ComplexCoordinatesResponder
+from responders.ubresponder import UBResponder
 from settings import TOKEN, ALLOWED
 
 BOT = telepot.Bot(TOKEN)
@@ -25,6 +26,10 @@ def handle(msg):
         # print('cL:', msg)
         BOT.sendMessage(chat_id, cListener.response_msg(), **cListener.response_params())
 
+    ubListener = UBResponder(msg)
+    if ubListener.valid:
+        print('Valid')
+        BOT.sendPhoto(chat_id, ubListener.response_url(), **ubListener.response_params())
     #cListener = SimplePhotoUrlFetcher(msg)
     #if cListener.valid:
     #    BOT.sendPhoto(chat_id, cListener.response_msg(), **cListener.response_params())

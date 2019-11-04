@@ -5,6 +5,19 @@ from parsers.simple_coordinates_parser import SimpleCoordinatesParser
 from parsers.other_coordinates_parser import OtherCoordinatesParser
 from settings import INDEX_START
 
+# OLD defaults
+ELAT_MIN = 50.0
+ELAT_MAX = 61.0
+ELON_MIN = 18.0
+ELON_MAX = 29.0
+
+# RADIUS 50km
+ELAT_MIN = 56.4265
+ELAT_MAX = 57.5336
+ELON_MIN = 23.1224
+ELON_MAX = 25.1587
+
+
 class ComplexCoordinatesResponder(object):
     def __init__(self, msg):
         msg_type, _chat_type, chat_id = telepot.glance(msg)
@@ -48,11 +61,11 @@ class ComplexCoordinatesResponder(object):
         for idx, coordinates in enumerate(self.coords):
             # TODO Flip coordinates during check in case of incorrect order
             lat, lon = coordinates
-            if math.trunc(float(lat)) in range(50, 61) and math.trunc(float(lon)) in range(18,29):
+            if ELAT_MIN <= float(lat) <= ELAT_MAX and ELON_MIN <= float(lon) <= ELON_MAX:
                 text += prefix + self.prepare_response(idx+1, lat, lon)+'\n\n'
             else:
                 lon, lat = coordinates
-                if math.trunc(float(lat)) in range(50, 61) and math.trunc(float(lon)) in range(18,29):
+                if ELAT_MIN <= float(lat) <= ELAT_MAX and ELON_MIN <= float(lon) <= ELON_MAX:
                     text += prefix + self.prepare_response(idx+1, lat, lon)+'\n\n'
                 else:
                     text += prefix + str(idx+1)+'*: Ignored due to our of search zone'
