@@ -1,5 +1,4 @@
 
-
 KEYS = ["BOOBS", "СИСКЕ", "TITTY", "ГРУД", "СОСОК"]
 class UBParser(object):
     def __init__(self, msg_text):

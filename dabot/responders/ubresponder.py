@@ -1,4 +1,4 @@
-import math
+import datetime
 import re
 import telepot
 import urllib.request
@@ -20,6 +20,7 @@ class UBResponder(object):
         self.index = int(msg['message_id'])-INDEX_START
         if not self.valid:
             self.valid = (self.index % 37) == 0
+        self.valid = self.valid and not (datetime.time(hour=6, minute=0) < datetime.datetime.now().time() < datetime.time(hour=22, minute=0))
         self.reply_to = msg['message_id']
 
     def response_url(self):
