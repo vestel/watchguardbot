@@ -24,7 +24,14 @@ class UnsplashResponder(object):
         lst = self.api.photos(type_='random', count=1, query=key)
         for one in lst.entries:
             url = one.link_download
+            self.image = one.body
         return url
 
     def response_params(self):
-        return {'disable_notification': True, 'reply_to_message_id': self.reply_to, 'caption': 'Чуйка подсказывает, что вы ждете эту картинку'}
+        return {'disable_notification': True,
+                'reply_to_message_id': self.reply_to,
+                'parse_mode': 'Markdown',
+                'caption': """Чуйка подсказывает, что вы ждете эту картинку. 
+Photo by [{}]({}) on [Unsplash]({})""".format(self.image['user']['name'],
+            self.image['user']['links']['html'],
+            "https://unsplash.com/?utm_source=DarwinMoodBot&utm_medium=referral")}
