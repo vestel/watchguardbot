@@ -14,7 +14,7 @@ class UnsplashResponder(object):
             self.valid = parser.valid()
         self.index = int(msg['message_id'])-INDEX_START
         if not self.valid and (self.index % 42 == 0):
-            self.valid = random.sample(list(KEYS.keys()), 1).pop()
+            self.valid = random.sample(list(KEYS.values()), 1).pop()
         if not (datetime.time(hour=6, minute=0) < datetime.datetime.now().time() < datetime.time(hour=22, minute=0)):
             self.valid = False
         self.reply_to = msg['message_id']
