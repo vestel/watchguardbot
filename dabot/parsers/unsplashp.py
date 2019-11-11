@@ -1,4 +1,6 @@
-KEYS = {"ЕЖИК": 'hedgehog', "ЛИСА": 'fox', "ПСИНА": 'dog', "КСЮША": 'horse', "РЫБА": 'fish', "СВИН": 'pig'}
+KEYS = {"ЕЖИК": 'hedgehog', "ЛИСА": 'fox', "ПСИНА": 'dog',
+        "КСЮША": 'horse', "РЫБА": 'fish', "СВИН": 'pig',
+        "МУРКА": 'kitty', "БАРСИК": 'cat', "ТАИГА": 'wildlife'}
 class UnsplashParser(object):
     def __init__(self, msg_text):
         split_words = msg_text.split(' ')
