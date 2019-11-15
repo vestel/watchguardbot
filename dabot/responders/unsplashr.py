@@ -14,7 +14,9 @@ class UnsplashResponder(object):
             self.valid = parser.valid()
         self.index = int(msg['message_id'])-INDEX_START
         if not self.valid and (self.index % 42 == 0):
+            print('42 Triggered: ', end='')
             self.valid = random.sample(list(KEYS.values()), 1).pop()
+        self.valid = self.valid and not('edit_date' in msg)
         self.reply_to = msg['message_id']
         self.api = unsplash
 

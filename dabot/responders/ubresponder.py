@@ -19,8 +19,11 @@ class UBResponder(object):
             self.valid = self.valid and parser.valid()
         self.index = int(msg['message_id'])-INDEX_START
         if not self.valid:
-            self.valid = (self.index % 37) == 0
-        self.valid = self.valid and not (datetime.time(hour=6, minute=0) < datetime.datetime.now().time() < datetime.time(hour=22, minute=0))
+            self.valid = (self.index % 34) == 0
+        self.valid = self.valid and not (datetime.time(hour=6, minute=30) < datetime.datetime.now().time() < datetime.time(hour=22, minute=0))
+        self.valid = self.valid and not('edit_date' in msg)
+        if self.valid and (self.index % 34) == 0:
+            print('34 Triggered: ', end='')
         self.reply_to = msg['message_id']
 
     def response_url(self):

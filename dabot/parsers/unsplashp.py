@@ -1,6 +1,8 @@
 KEYS = {"ЕЖИК": 'hedgehog', "ЛИСА": 'fox', "ПСИНА": 'dog', "КСЮША": 'horse', "ФИШКА": 'fish', "ЛЕВА": 'lion',
         "СВИН": 'pig', "МУРКА": 'kitty', "БАРСИК": 'cat', "КАРКАР": 'bird', "ТИГРА": 'tiger', "КЕША": 'parrot',
         "ТАИГА": 'wildlife', "ПЛЯЖ": 'beach', "ЛУЖА": 'ocean', "ОХОТА": 'safari', "МИША": 'bear', "КУНФУ": 'panda',
+        "ЛОЛО": 'penguin', "МЕЛМАН": 'giraffe', "РАКЕТА": 'racoon', "МАРТИ": "zebra", "ГЛОРИЯ": 'hippo',
+        "ГОРА": 'mountain', "НЕБО": 'sky', "ОБЛАКО": 'cloud', "УТЕС": 'cliff', "ОТПУСК": 'vacation',
         "ЧУВИХА": 'beautiful-girl', "ЧУВАК": 'male-model', "ШТИК": 'love', "ЖАРА": 'sexy', "СОПЛИ": 'romance'}
 
 class UnsplashParser(object):
@@ -13,5 +15,6 @@ class UnsplashParser(object):
     def valid(self):
         for key in list(KEYS.keys()):
             if key in self.abbr:
+                print('Keyword: {} '.format(KEYS[key]), end='')
                 return KEYS[key]
         return False
