@@ -17,6 +17,11 @@ ELAT_MAX = 57.5336
 ELON_MIN = 23.1224
 ELON_MAX = 25.1587
 
+# RADIUS 100km
+ELAT_MIN = 55.9855
+ELAT_MAX = 57.9789
+ELON_MIN = 22.2956
+ELON_MAX = 25.9584
 
 class ComplexCoordinatesResponder(object):
     def __init__(self, msg):
