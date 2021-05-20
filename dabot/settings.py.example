@@ -1,5 +1,13 @@
 TOKEN='Token-from-Telegram-Bot-Config'
 START_INDEX=0  #Number to subtract from message_id to get msg number
+
 ALLOWED={}
 ALLOWED[-ID] = 'Human-Readable Group Name'
 
+BOT_ADMINS = {}
+#BOT_ADMINS[-ID] = {'UserHandle': UserId}
+
+DEFAULT_FEATURES = {}
+DEFAULT_FEATURES['coords'] = True
+DEFAULT_FEATURES['pics'] = True
+DEFAULT_FEATURES['boobs'] = False
