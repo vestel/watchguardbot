@@ -13,6 +13,7 @@ BACKUP = 'https://media.tits-guru.com/images/ca456ca2-0409-4f99-a0fd-8a1d2de953a
 class UBResponder(object):
     def __init__(self, msg):
         msg_type, _chat_type, chat_id = telepot.glance(msg)
+        self.handle = 'boobs'
         self.valid =  msg_type == 'text'
         if self.valid:
             parser = UBParser(msg['text'])

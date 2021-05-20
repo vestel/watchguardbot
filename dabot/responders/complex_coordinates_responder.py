@@ -38,6 +38,7 @@ ELON_MAX = 29.0
 class ComplexCoordinatesResponder(object):
     def __init__(self, msg):
         msg_type, _chat_type, chat_id = telepot.glance(msg)
+        self.handle = 'coords'
         self.valid =  msg_type == 'text'
         if self.valid:
             parser = SimpleCoordinatesParser(msg['text'])

@@ -8,6 +8,7 @@ from settings import INDEX_START
 class UnsplashResponder(object):
     def __init__(self, msg, unsplash):
         msg_type, _chat_type, chat_id = telepot.glance(msg)
+        self.handle = 'pics'
         self.valid =  msg_type == 'text'
         if self.valid:
             parser = UnsplashParser(msg['text'])
