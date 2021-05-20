@@ -12,16 +12,28 @@ ELON_MIN = 18.0
 ELON_MAX = 29.0
 
 # RADIUS 50km
-ELAT_MIN = 56.4265
-ELAT_MAX = 57.5336
-ELON_MIN = 23.1224
-ELON_MAX = 25.1587
+#ELAT_MIN = 56.4265
+#ELAT_MAX = 57.5336
+#ELON_MIN = 23.1224
+#ELON_MAX = 25.1587
 
-# RADIUS 100km
-ELAT_MIN = 55.9855
-ELAT_MAX = 57.9789
-ELON_MIN = 22.2956
-ELON_MAX = 25.9584
+## RADIUS 100km
+#ELAT_MIN = 55.9855
+#ELAT_MAX = 57.9789
+#ELON_MIN = 22.2956
+#ELON_MAX = 25.9584
+
+## RADIUS Roadgames
+#ELAT_MIN = 56.20
+#ELAT_MAX = 56.77
+#ELON_MIN = 23.1956
+#ELON_MAX = 24.7584
+
+## RADIUS Tallinn
+#ELAT_MIN = 58.5455
+#ELAT_MAX = 59.6789
+#ELON_MIN = 23.3956
+#ELON_MAX = 26.5464
 
 class ComplexCoordinatesResponder(object):
     def __init__(self, msg):
@@ -55,10 +67,9 @@ class ComplexCoordinatesResponder(object):
         return "[Baltic](https://balticmaps.eu/map/?lat=%s&lon=%s&color=red&key=MK_464786&zoom=17)"%(lat,lon)
 
     def prepare_response(self, num, lat, lon):
-        return '%d* (%s, %s) %s %s %s %s %s' % (num, lat, lon, 
+        return '%d* (%s, %s) %s %s %s %s' % (num, lat, lon, 
             self.waze_link(lat,lon), self.gmaps_link(lat, lon), 
-            self.osmand_link(lat, lon), self.bing_link(lat,lon), 
-            self.bmaps_link(lat,lon)) 
+            self.osmand_link(lat, lon), self.bing_link(lat,lon))
 
     def response_msg(self):
         text = ''
