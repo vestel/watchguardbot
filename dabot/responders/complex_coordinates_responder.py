@@ -11,6 +11,18 @@ ELAT_MAX = 61.0
 ELON_MIN = 18.0
 ELON_MAX = 29.0
 
+# Salaspils 150+
+#ELAT_MIN = 56.708
+#ELAT_MAX = 57.035
+#ELON_MIN = 24.074
+#ELON_MAX = 24.701
+
+
+# 2.11 57.010869, 24.521670
+LAT_center = 57.010869
+LON_center = 24.521670
+RADIUS=25
+
 # RADIUS 50km
 #ELAT_MIN = 56.4265
 #ELAT_MAX = 57.5336
@@ -72,17 +84,34 @@ class ComplexCoordinatesResponder(object):
             self.waze_link(lat,lon), self.gmaps_link(lat, lon), 
             self.osmand_link(lat, lon), self.bing_link(lat,lon))
 
+    def is_in_range(self, lat, lon):
+        lat1, lon1, lat2, lon2 = map(math.radians, [lat, lon, LAT_center, LON_center])
+
+        # calculate haversine formula
+        dlat = lat2 - lat1
+        dlon = lon2 - lon1
+        a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+        c = 2 * math.asin(math.sqrt(a))
+        r = 6371 # radius of the earth in km
+
+        # check if point is within the circle
+        return c * r <= RADIUS
+
     def response_msg(self):
         text = ''
         prefix = '*#%s.' % self.index
         for idx, coordinates in enumerate(self.coords):
             # TODO Flip coordinates during check in case of incorrect order
             lat, lon = coordinates
-            if ELAT_MIN <= float(lat) <= ELAT_MAX and ELON_MIN <= float(lon) <= ELON_MAX:
+            check = self.is_in_range(float(lat), float(lon))
+            if check:
+            # if ELAT_MIN <= float(lat) <= ELAT_MAX and ELON_MIN <= float(lon) <= ELON_MAX:
                 text += prefix + self.prepare_response(idx+1, lat, lon)+'\n\n'
             else:
                 lon, lat = coordinates
-                if ELAT_MIN <= float(lat) <= ELAT_MAX and ELON_MIN <= float(lon) <= ELON_MAX:
+                check = self.is_in_range(float(lat), float(lon))
+                # if ELAT_MIN <= float(lat) <= ELAT_MAX and ELON_MIN <= float(lon) <= ELON_MAX:
+                if check:
                     text += prefix + self.prepare_response(idx+1, lat, lon)+'\n\n'
                 else:
                     text += prefix + str(idx+1)+'*: Ignored due to our of search zone'

@@ -11,9 +11,11 @@ from pyunsplash import PyUnsplash
 
 BOT = telepot.Bot(TOKEN)
 API = PyUnsplash(api_key=UNSPLASH_KEY)
+
 currentFeatures = {}
 for chat_id in list(ALLOWED.keys()):
     currentFeatures[chat_id] = DEFAULT_FEATURES
+print(currentFeatures)
 
 def handle(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
@@ -26,7 +28,7 @@ def handle(msg):
         print('Received: ', content_type, ALLOWED[chat_id])
 
     # Check if admin, fix current settings
-    if msg['text'].startswith('`dbot_'):
+    if 'text' in msg and msg['text'].startswith('`dbot_'):
         print(msg)
         if msg['from']['id'] in BOT_ADMINS[chat_id].values():
             print('AdminCommand:', msg)
@@ -34,11 +36,13 @@ def handle(msg):
             try:
                 key = param.split('=')[0]
                 value = param.split('=')[1]
-                print(currentFeatures[chat_id].get(key))
                 currentFeatures[chat_id][key] = value == 'on'
+                print(currentFeatures[chat_id].get(key))
             except IndexError:
                 pass
             return
+        else:
+            print(f"Unauthorized admin {msg['from']}")
 
     # Responders are classes that respond to msg-s
     cListener = ComplexCoordinatesResponder(msg)
@@ -59,6 +63,7 @@ def handle(msg):
         print('Unsplash Image')
         BOT.sendPhoto(chat_id, unListener.response_url(), **unListener.response_params())
         return
+
     #cListener = SimplePhotoUrlFetcher(msg)
     #if cListener.valid:
     #    BOT.sendPhoto(chat_id, cListener.response_msg(), **cListener.response_params())
@@ -69,4 +74,4 @@ print ('Listening ...')
 
 # Keep the program running.
 while 1:
-    time.sleep(5)
+    time.sleep(7)

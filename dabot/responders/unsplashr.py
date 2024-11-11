@@ -28,6 +28,7 @@ class UnsplashResponder(object):
         for one in lst.entries:
             url = one.link_download
             self.image = one.body
+        print(f"Unsplash URL: {url}")
         return url
 
     def response_params(self):
